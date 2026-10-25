@@ -1,0 +1,39 @@
+---
+import { skills } from '../data/portfolio';
+
+const all = skills.flatMap((s) => s.items);
+---
+
+<section id="skills" class="py-28 md:py-40">
+  <div class="container-x">
+    <p class="section-label mb-4" data-reveal>Skills & stack</p>
+    <h2 class="section-title max-w-3xl" data-split>Tools I use to bring ideas to life.</h2>
+
+    <div class="mt-16 grid gap-5 md:grid-cols-3">
+      {skills.map((group, i) => (
+        <div data-reveal class="rounded-3xl border border-line bg-card p-7">
+          <p class="font-display text-sm text-muted">0{i + 1}</p>
+          <h3 class="font-display mt-2 text-2xl font-bold">{group.group}</h3>
+          <ul class="mt-6 flex flex-wrap gap-2">
+            {group.items.map((item) => (
+              <li class="rounded-full border border-line px-3 py-1.5 text-sm transition-colors hover:border-accent hover:text-accent">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Infinite marquee (pure CSS, zero JS) -->
+  <div class="mt-24 overflow-hidden border-y border-line py-6 [mask-image:linear-gradient(90deg,transparent,black_15%,black_85%,transparent)]" aria-hidden="true">
+    <div class="marquee-track flex w-max gap-12">
+      {[...all, ...all].map((item) => (
+        <span class="font-display flex items-center gap-12 text-4xl font-bold whitespace-nowrap text-muted md:text-6xl">
+          {item}<span class="text-accent">✦</span>
+        </span>
+      ))}
+    </div>
+  </div>
+</section>

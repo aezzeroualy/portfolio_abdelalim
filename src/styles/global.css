@@ -1,0 +1,117 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --color-accent: #a3e635;
+  --color-accent-strong: #65a30d;
+}
+
+:root {
+  --bg: #f7f7f5;
+  --fg: #0b0b10;
+  --muted: #5b5b66;
+  --card: #ffffff;
+  --line: rgb(0 0 0 / 0.08);
+  --accent-text: #4d7c0f;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0b0b10;
+  --fg: #f2f2f0;
+  --muted: #9a9aa6;
+  --card: #13131a;
+  --line: rgb(255 255 255 / 0.08);
+  --accent-text: #a3e635;
+  color-scheme: dark;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #0b0b10;
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+
+/* Utility classes */
+.text-muted { color: var(--muted); }
+.text-accent { color: var(--accent-text); }
+.bg-card { background: var(--card); }
+.border-line { border-color: var(--line); }
+
+.container-x {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .container-x { padding-inline: 2rem; }
+}
+
+.section-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+/* Split-text helpers (used by GSAP) */
+.split-line { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.split-inner { display: inline-block; will-change: transform; }
+
+/* Hide animated elements until JS runs, to avoid a flash */
+.js [data-reveal] { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] { opacity: 1 !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Grain overlay */
+.noise::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 30s linear infinite; }

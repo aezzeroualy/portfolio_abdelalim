@@ -1,0 +1,40 @@
+---
+import { profile } from '../data/portfolio';
+---
+
+<section id="contact" class="relative overflow-hidden py-28 md:py-40">
+  <div aria-hidden="true" class="pointer-events-none absolute bottom-[-30%] left-1/2 size-[40rem] -translate-x-1/2 rounded-full bg-accent/20 blur-[140px]"></div>
+
+  <div class="container-x relative text-center">
+    <p class="section-label mb-6" data-reveal>Contact</p>
+    <h2 data-split class="font-display mx-auto max-w-4xl text-[clamp(2.5rem,8vw,6rem)] leading-[0.95] font-bold tracking-[-0.03em]">
+      Let's build something great together.
+    </h2>
+    <p data-reveal class="mx-auto mt-8 max-w-lg text-lg text-muted">
+      Have a project in mind or an opportunity? My inbox is always open.
+    </p>
+
+    <div data-reveal class="mt-12 flex justify-center">
+      <a
+        href={`mailto:${profile.email}`}
+        data-magnetic
+        class="font-display max-w-full rounded-full bg-accent px-8 py-5 text-base font-bold break-all text-[#0b0b10] shadow-[0_0_60px_-10px] shadow-accent/70 md:px-10 md:py-6 md:text-xl"
+      >{profile.email}</a>
+    </div>
+
+    <ul data-reveal class="mt-12 flex flex-wrap justify-center gap-3">
+      {profile.socials.map((s) => (
+        <li>
+          <a href={s.href} target="_blank" rel="noopener noreferrer" class="inline-block rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-accent hover:text-accent">
+            {s.label} ↗
+          </a>
+        </li>
+      ))}
+      <li>
+        <a href={profile.cv} class="inline-block rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-accent hover:text-accent">
+          Download CV ↓
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,10 @@
+---
+import { profile } from '../data/portfolio';
+---
+
+<footer class="border-t border-line py-8">
+  <div class="container-x flex flex-col items-center justify-between gap-3 text-sm text-muted sm:flex-row">
+    <p>© <span data-year>{new Date().getFullYear()}</span> {profile.fullName}. All rights reserved.</p>
+    <p>Built with Astro, Tailwind & GSAP.</p>
+  </div>
+</footer>
