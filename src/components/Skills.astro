@@ -1,13 +1,16 @@
 ---
-import { skills } from '../data/portfolio';
+import { getContent, getLang, useTranslations } from '../i18n';
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+const { skills, softSkills } = getContent(lang);
 
 const all = skills.flatMap((s) => s.items);
 ---
 
-<section id="skills" class="py-28 md:py-40">
+<section id="skills" class="py-20 md:py-28">
   <div class="container-x">
-    <p class="section-label mb-4" data-reveal>Skills & stack</p>
-    <h2 class="section-title max-w-3xl" data-split>Tools I use to bring ideas to life.</h2>
+    <p class="section-label mb-4" data-reveal>{t('skills.label')}</p>
+    <h2 class="section-title max-w-3xl" data-split>{t('skills.title')}</h2>
 
     <div class="mt-16 grid gap-5 md:grid-cols-3">
       {skills.map((group, i) => (
@@ -24,6 +27,10 @@ const all = skills.flatMap((s) => s.items);
         </div>
       ))}
     </div>
+
+    <p data-reveal class="mt-8 text-muted">
+      {t('skills.soft')} <span class="text-[var(--fg)]">{softSkills.join(' · ')}</span>
+    </p>
   </div>
 
   <!-- Infinite marquee (pure CSS, zero JS) -->

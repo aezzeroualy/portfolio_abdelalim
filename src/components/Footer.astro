@@ -1,10 +1,13 @@
 ---
-import { profile } from '../data/portfolio';
+import { getContent, getLang, useTranslations } from '../i18n';
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+const { profile } = getContent(lang);
 ---
 
 <footer class="border-t border-line py-8">
   <div class="container-x flex flex-col items-center justify-between gap-3 text-sm text-muted sm:flex-row">
-    <p>© <span data-year>{new Date().getFullYear()}</span> {profile.fullName}. All rights reserved.</p>
-    <p>Built with Astro, Tailwind & GSAP.</p>
+    <p>© <span data-year>{new Date().getFullYear()}</span> {profile.fullName}. {t('footer.rights')}</p>
+    <p>{t('footer.built')}</p>
   </div>
 </footer>

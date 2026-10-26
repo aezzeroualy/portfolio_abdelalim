@@ -5,8 +5,8 @@
 @theme {
   --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --color-accent: #a3e635;
-  --color-accent-strong: #65a30d;
+  --color-accent: #dc2626;
+  --color-accent-strong: #991b1b;
 }
 
 :root {
@@ -15,17 +15,17 @@
   --muted: #5b5b66;
   --card: #ffffff;
   --line: rgb(0 0 0 / 0.08);
-  --accent-text: #4d7c0f;
+  --accent-text: #b91c1c;
   color-scheme: light;
 }
 
 .dark {
-  --bg: #0b0b10;
+  --bg: #0c0909;
   --fg: #f2f2f0;
   --muted: #9a9aa6;
-  --card: #13131a;
+  --card: #161011;
   --line: rgb(255 255 255 / 0.08);
-  --accent-text: #a3e635;
+  --accent-text: #f04444;
   color-scheme: dark;
 }
 
@@ -43,7 +43,7 @@ body {
 
 ::selection {
   background: var(--color-accent);
-  color: #0b0b10;
+  color: #ffffff;
 }
 
 /* Lenis smooth scroll */

@@ -1,58 +1,78 @@
 ---
-import { profile } from '../data/portfolio';
+import { Image } from 'astro:assets';
+import { getContent, getLang, useTranslations } from '../i18n';
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+const { profile } = getContent(lang);
+import photo from '../assets/abdelalim.jpg';
 ---
 
 <section id="top" data-hero class="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-16">
   <!-- Glow orbs -->
-  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]">
     <div data-hero-orb class="absolute -top-32 right-[-10%] size-[38rem] rounded-full bg-accent/25 blur-[120px]"></div>
-    <div data-hero-orb class="absolute bottom-[-20%] left-[-10%] size-[30rem] rounded-full bg-sky-500/20 blur-[120px]"></div>
+    <div data-hero-orb class="absolute bottom-[-20%] left-[-10%] size-[30rem] rounded-full bg-red-900/30 blur-[120px]"></div>
     <div
       class="absolute inset-0 opacity-[0.15] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]"
       style="background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px"
     ></div>
   </div>
 
-  <div data-hero-content class="container-x relative">
-    {profile.available && (
-      <p data-reveal class="mb-8 inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-sm text-muted">
-        <span class="relative flex size-2">
-          <span class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75"></span>
-          <span class="relative inline-flex size-2 rounded-full bg-accent"></span>
-        </span>
-        Available for new projects
+  <div data-hero-content class="container-x relative grid items-center gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
+    <div>
+      {profile.available && (
+        <p data-reveal class="mb-8 inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-sm text-muted">
+          <span class="relative flex size-2">
+            <span class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75"></span>
+            <span class="relative inline-flex size-2 rounded-full bg-accent"></span>
+          </span>
+          {t('hero.available')}
+        </p>
+      )}
+
+      <h1
+        data-split
+        data-hero-title
+        class="font-display text-[clamp(2.75rem,7vw,6rem)] leading-[0.95] font-bold tracking-[-0.04em]"
+      >
+        {t('hero.title', { name: profile.name })}
+      </h1>
+
+      <p data-reveal class="mt-10 max-w-xl text-lg text-muted md:text-xl">
+        <span class="text-[var(--fg)]">{profile.role}</span> {t('hero.basedIn')} {profile.location}. {profile.tagline}
       </p>
-    )}
 
-    <h1
-      data-split
-      data-hero-title
-      class="font-display text-[clamp(2.75rem,9vw,7.5rem)] leading-[0.95] font-bold tracking-[-0.04em]"
-    >
-      Hi, I'm {profile.name}. I craft digital products.
-    </h1>
-
-    <div class="mt-10 grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
-      <p data-reveal class="max-w-xl text-lg text-muted md:text-xl">
-        <span class="text-[var(--fg)]">{profile.role}</span> based in {profile.location}. {profile.tagline}
-      </p>
-
-      <div data-reveal class="flex flex-wrap gap-3">
+      <div data-reveal class="mt-8 flex flex-wrap gap-3">
         <a
           href="#projects"
           data-magnetic
-          class="rounded-full bg-accent px-7 py-4 font-semibold text-[#0b0b10] shadow-[0_0_40px_-8px] shadow-accent/60"
-        >View my work</a>
+          class="rounded-full bg-accent px-7 py-4 font-semibold text-white shadow-[0_0_40px_-8px] shadow-accent/60"
+        >{t('hero.work')}</a>
         <a
           href="#contact"
           data-magnetic
           class="rounded-full border border-line px-7 py-4 font-semibold transition-colors hover:border-accent"
-        >Contact me</a>
+        >{t('hero.contact')}</a>
       </div>
     </div>
+
+    <figure data-reveal class="relative mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-none">
+      <div aria-hidden="true" class="absolute -inset-3 -z-10 rounded-[2rem] bg-accent/30 blur-2xl"></div>
+      <div class="overflow-hidden rounded-[2rem] border border-line">
+        <Image
+          src={photo}
+          alt={t('hero.photoAlt', { name: profile.fullName })}
+          widths={[320, 480, 747]}
+          sizes="(min-width: 1024px) 420px, 384px"
+          loading="eager"
+          fetchpriority="high"
+          class="aspect-[4/5] w-full object-cover object-top"
+        />
+      </div>
+    </figure>
   </div>
 
-  <a href="#about" aria-label="Scroll down" class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 md:block">
+  <a href="#about" aria-label={t('hero.scroll')} class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 md:block">
     <span class="flex h-12 w-7 justify-center rounded-full border border-line pt-2">
       <span class="h-2 w-1 animate-bounce rounded-full bg-accent"></span>
     </span>

@@ -1,12 +1,15 @@
 ---
-import { about } from '../data/portfolio';
+import { getContent, getLang, useTranslations } from '../i18n';
+const lang = getLang(Astro.url);
+const t = useTranslations(lang);
+const { about } = getContent(lang);
 ---
 
-<section id="about" class="py-28 md:py-40">
+<section id="about" class="py-20 md:py-28">
   <div class="container-x grid gap-14 md:grid-cols-[1fr_1.4fr]">
     <div>
-      <p class="section-label mb-4" data-reveal>About me</p>
-      <h2 class="section-title" data-split>Code with purpose, design with care.</h2>
+      <p class="section-label mb-4" data-reveal>{t('about.label')}</p>
+      <h2 class="section-title" data-split>{t('about.title')}</h2>
     </div>
 
     <div class="space-y-6 text-lg leading-relaxed text-muted">
@@ -22,6 +25,10 @@ import { about } from '../data/portfolio';
           </div>
         ))}
       </dl>
+
+      <p data-reveal class="text-base">
+        {t('about.languages')} <span class="text-[var(--fg)]">{about.languages.join(' · ')}</span>
+      </p>
     </div>
   </div>
 </section>
