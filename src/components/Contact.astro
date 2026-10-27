@@ -1,5 +1,5 @@
 ---
-import { getContent, getLang, useTranslations } from '../i18n';
+import { getContent, getLang, useTranslations, withBase } from '../i18n';
 const lang = getLang(Astro.url);
 const t = useTranslations(lang);
 const { profile } = getContent(lang);
@@ -34,7 +34,7 @@ const { profile } = getContent(lang);
         </li>
       ))}
       <li>
-        <a href={profile.cv} class="inline-block rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-accent hover:text-accent">
+        <a href={withBase(profile.cv)} class="inline-block rounded-full border border-line px-5 py-2.5 text-sm transition-colors hover:border-accent hover:text-accent">
           {t('contact.cv')} ↓
         </a>
       </li>

@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { getContent, getLang, homeUrl } from '../i18n';
+import { getContent, getLang, homeUrl, withBase } from '../i18n';
 const lang = getLang(Astro.url);
 const { profile } = getContent(lang);
 
@@ -28,7 +28,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="alternate" hreflang="fr" href={new URL(homeUrl('fr'), Astro.site)} />
     <link rel="alternate" hreflang="x-default" href={new URL(homeUrl('en'), Astro.site)} />
     <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <meta name="theme-color" content="#0c0909" />
 
     <meta property="og:type" content="website" />

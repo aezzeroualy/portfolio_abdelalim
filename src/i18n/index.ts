@@ -108,11 +108,19 @@ export function getContent(lang: Lang) {
   return lang === 'fr' ? fr : en;
 }
 
+/** Site base path without trailing slash ('' at the domain root, '/portfolio_abdelalim' on GitHub Pages). */
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+/** Prefix a root-relative path ('/cv.pdf') with the site base. External links are returned unchanged. */
+export function withBase(path: string) {
+  return path.startsWith('/') ? `${base}${path}` : path;
+}
+
 export function getLang(url: URL): Lang {
-  return url.pathname.startsWith('/fr') ? 'fr' : 'en';
+  return url.pathname.slice(base.length).startsWith('/fr') ? 'fr' : 'en';
 }
 
 /** Home page URL for a language. */
 export function homeUrl(lang: Lang) {
-  return lang === 'fr' ? '/fr/' : '/';
+  return withBase(lang === 'fr' ? '/fr/' : '/');
 }
